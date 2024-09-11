@@ -132,11 +132,11 @@ public class ArmSubsystem extends SubsystemBase {
      *
      * @return value of some boolean subsystem state, such as a digital sensor.
      */
-    public void run(double output){
-      //  double output = m_turningPIDController.calculate(a_encoder.getPosition(), 10/*angle for speaker */);
-          output = Math.min(speed, Math.max(-speed, output));
-          a_motor1.set(output);
-          a_motor2.set(-output);
+  public void run(double output){
+    //  double output = m_turningPIDController.calculate(a_encoder.getPosition(), 10/*angle for speaker */);
+      output = Math.min(speed, Math.max(-speed, output));
+      a_motor1.set(output);
+      a_motor2.set(-output);
   }
   public void armDown(){
     // max speed is speed!!!!!!!! DO NOT GO OVER!!!
