@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -11,7 +12,8 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class SwerveModuleSubsystem{
+
+public class SwerveModule{
   private static final double kTurningEncoderResolution = 420;//410; //189*2; //383.6; // 424; // 424 pulses for one revolution
 
   private final TalonSRX m_driveMotor;
@@ -40,7 +42,7 @@ public class SwerveModuleSubsystem{
    * @param turningEncoderChannelA DIO input for the turning encoder channel A
    * @param turningEncoderChannelB DIO input for the turning encoder channel Bx
    */
-    public SwerveModuleSubsystem(
+    public SwerveModule(
     int driveMotorChannel,
     int turningMotorChannel,
     int turningEncoderChannelA,

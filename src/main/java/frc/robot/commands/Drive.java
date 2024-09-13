@@ -4,7 +4,9 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import java.util.function.BooleanSupplier;
@@ -12,28 +14,28 @@ import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
 /** An example command that uses an example subsystem. */
-public class  extends Command {
+public class Drive extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DriveSubsystem m_subsystem;
+  //private final DriveSubsystem m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  private final SwerveSubsystem swerveSubsystem;
-  private final Supplier<Double> xSpdFunction, ySpdFunction, turningSpdFunction;
+  private final DriveSubsystem swerveSubsystem;
+  private final Supplier<Double> xSpdFunction, ySpdFunction, rotSpdFunction;
 
   private final SlewRateLimiter m_xspeedLimiter = new SlewRateLimiter(3);
   private final SlewRateLimiter m_yspeedLimiter = new SlewRateLimiter(3);
   private final SlewRateLimiter m_rotLimiter = new SlewRateLimiter(3);
 
-  public DriveCommand(DriveSubsystem subsystem,
-                      DoubleSupplier xSpdFunction
-                      DoubleSupplier ySpdFunction
-                      DoubleSupplier rotSpdFunction
+  public Drive(DriveSubsystem subsystem,
+                      Supplier<Double> xSpdFunction,
+                      Supplier<Double> ySpdFunction,
+                      Supplier<Double> rotSpdFunction
                        ) {
-    this.swervesubsystem = subsystem;
+    this.swerveSubsystem = subsystem;
     this.xSpdFunction = xSpdFunction;
     this.ySpdFunction = ySpdFunction;
     this.rotSpdFunction = rotSpdFunction;
@@ -59,10 +61,10 @@ public class  extends Command {
         // 2. Apply deadband
     
         // 3. Make the driving smoother
-    xSpeed = m_xspeedLimiter.calculate(xSpeed) //times max constant ;
-    ySpeed = m_yspeedLimiter.calculate(ySpeed) // times max constant;
-    turningSpeed = m_rotLimiter.calculate(turningSpeed)
-            * DriveConstants.kTeleDriveMaxAngularSpeedRadiansPerSecond;
+    xSpeed = m_xspeedLimiter.calculate(xSpeed); //times max constant ;
+    ySpeed = m_yspeedLimiter.calculate(ySpeed); // times max constant;
+    turningSpeed = m_rotLimiter.calculate(turningSpeed); 
+            //* DriveConstants.kTeleDriveMaxAngularSpeedRadiansPerSecond;
 
     swerveSubsystem.drive(xSpeed,ySpeed,turningSpeed);
   }

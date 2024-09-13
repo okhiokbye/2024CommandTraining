@@ -3,21 +3,21 @@
  */
 package frc.robot;
 
-class Constants{
+public class Constants{
     /* Current threshold to trigger current limit */
-    static final int kPeakCurrentAmps = 15;
+    public static final int kPeakCurrentAmps = 15;
     
     /* Duration after current exceed Peak Current to trigger current limit */
-    static final int kPeakTimeMs = 0;
+    public static final int kPeakTimeMs = 0;
 
     /* Current to maintain once current limit has been triggered */
-    static final int kContinCurrentAmps = 10;
+    public static final int kContinCurrentAmps = 10;
 
     /**
      * Timeout value generally used in parameter configs
      * Non-zero to block the config until success, zero to skip checking 
      */
-    static final int kTimeoutMs = 30;
+    public static final int kTimeoutMs = 30;
 
     /**
      * Gains used in Position Closed Loop, to be adjusted accordingly
