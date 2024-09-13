@@ -163,7 +163,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run use for telemetry
+    // This method will be called once per scheduler run use for telemetry/PID
   }
 
   @Override

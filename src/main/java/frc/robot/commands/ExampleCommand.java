@@ -7,18 +7,37 @@ package frc.robot.commands;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
+import java.util.function.BooleanSupplier;
+import java.util.function.DoubleSupplier;
+import java.util.function.Supplier;
+
 /** An example command that uses an example subsystem. */
-public class ExampleCommand extends Command {
+public class  extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ExampleSubsystem m_subsystem;
+  private final DriveSubsystem m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ExampleCommand(ExampleSubsystem subsystem) {
-    m_subsystem = subsystem;
+  private final SwerveSubsystem swerveSubsystem;
+  private final Supplier<Double> xSpdFunction, ySpdFunction, turningSpdFunction;
+
+  private final SlewRateLimiter m_xspeedLimiter = new SlewRateLimiter(3);
+  private final SlewRateLimiter m_yspeedLimiter = new SlewRateLimiter(3);
+  private final SlewRateLimiter m_rotLimiter = new SlewRateLimiter(3);
+
+  public DriveCommand(DriveSubsystem subsystem,
+                      DoubleSupplier xSpdFunction
+                      DoubleSupplier ySpdFunction
+                      DoubleSupplier rotSpdFunction
+                       ) {
+    this.swervesubsystem = subsystem;
+    this.xSpdFunction = xSpdFunction;
+    this.ySpdFunction = ySpdFunction;
+    this.rotSpdFunction = rotSpdFunction;
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -29,11 +48,30 @@ public class ExampleCommand extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+
+
+    // 1. Get real-time joystick inputs
+    double xSpeed = MathUtil.applyDeadband(xSpdFunction.get(), 0.2);
+    double ySpeed = MathUtil.applyDeadband(ySpdFunction.get(), 0.2);
+    double turningSpeed = MathUtil.applyDeadband(rotSpdFunction.get(), 0.2);
+
+        // 2. Apply deadband
+    
+        // 3. Make the driving smoother
+    xSpeed = m_xspeedLimiter.calculate(xSpeed) //times max constant ;
+    ySpeed = m_yspeedLimiter.calculate(ySpeed) // times max constant;
+    turningSpeed = m_rotLimiter.calculate(turningSpeed)
+            * DriveConstants.kTeleDriveMaxAngularSpeedRadiansPerSecond;
+
+    swerveSubsystem.drive(xSpeed,ySpeed,turningSpeed);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    swerveSubsystem.drive(0,0,0);
+  }
 
   // Returns true when the command should end.
   @Override
