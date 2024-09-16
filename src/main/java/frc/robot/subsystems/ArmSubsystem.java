@@ -20,6 +20,8 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+// RECODE ARM LOGIC WITH PIDSUBSYSTEM, maybe let the interns do it??
+
 public class ArmSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
  

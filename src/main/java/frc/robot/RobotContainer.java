@@ -23,10 +23,10 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveSubsystem m_SwerveDrive = new DriveSubsystem();
+  private final DriveSubsystem m_swerve = new DriveSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
- private final CommandJoystick m_Joystick = new CommandJoystick(0);
+ private final CommandJoystick m_driverJoystick = new CommandJoystick(0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -44,13 +44,18 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+   
+    m_swerve.setDefaultCommand(new Drive(
+                m_swerve,
+                () -> -m_driverJoystick.getRawAxis(0),
+                () -> m_driverJoystick.getRawAxis(1),
+                () -> m_driverJoystick.getRawAxis(2),
+                ));
+
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+
   }
 
   /**
