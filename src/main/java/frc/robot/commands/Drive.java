@@ -61,9 +61,9 @@ public class Drive extends Command {
         // 2. Apply deadband
     
         // 3. Make the driving smoother
-    xSpeed = m_xspeedLimiter.calculate(xSpeed); //times max constant ;
-    ySpeed = m_yspeedLimiter.calculate(ySpeed); // times max constant;
-    turningSpeed = m_rotLimiter.calculate(turningSpeed); 
+    xSpeed = m_xspeedLimiter.calculate(xSpeed)*5; //times max constant ;
+    ySpeed = m_yspeedLimiter.calculate(ySpeed)*5; // times max constant;
+    turningSpeed = m_rotLimiter.calculate(turningSpeed)*Math.PI; 
             //* DriveConstants.kTeleDriveMaxAngularSpeedRadiansPerSecond;
 
     swerveSubsystem.drive(xSpeed,ySpeed,turningSpeed);
