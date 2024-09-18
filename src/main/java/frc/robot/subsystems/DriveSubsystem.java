@@ -72,7 +72,7 @@ public class DriveSubsystem extends SubsystemBase {
     //               xSpeed, ySpeed, rot, new Rotation2d(m_gyro.getYaw()*(Math.PI/180))), 0.02
     //                 )
     //               );
-    m_kinematics.toSwerveModuleStates(ChassisSpeeds.fromFieldRelativeSpeeds(ySpeed, xSpeed, -rot , new Rotation2d(m_gyro.getYaw())));
+    m_kinematics.toSwerveModuleStates(ChassisSpeeds.fromFieldRelativeSpeeds(ySpeed, xSpeed, -rot , new Rotation2d.fromDegrees(m_gyro.getYaw())));
     //SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, kMaxSpeed);
     m_frontLeft.setDesiredState(swerveModuleStates[0]);
     m_frontRight.setDesiredState(swerveModuleStates[1]);
