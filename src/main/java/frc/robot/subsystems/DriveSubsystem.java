@@ -9,7 +9,9 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.wpilibj.AnalogGyro;
- import com.ctre.phoenix.sensors.Pigeon2;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import com.ctre.phoenix.sensors.Pigeon2;
  import com.ctre.phoenix.sensors.Pigeon2Configuration;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.*;
@@ -26,7 +28,7 @@ public class DriveSubsystem extends SubsystemBase {
   private final Translation2d m_backRightLocation = new Translation2d(-0.2096, -0.2096);
 
   
-  private final AHRS m_gyro = new AHRS(SerialPort.Port.kMXP);
+  private final Pigeon2 m_gyro = new Pigeon2(0);
 
   // B
   private final SwerveModule m_frontLeft = new SwerveModule(15, 4, 1, 0 );
@@ -72,7 +74,7 @@ public class DriveSubsystem extends SubsystemBase {
     //               xSpeed, ySpeed, rot, new Rotation2d(m_gyro.getYaw()*(Math.PI/180))), 0.02
     //                 )
     //               );
-    m_kinematics.toSwerveModuleStates(ChassisSpeeds.fromFieldRelativeSpeeds(ySpeed, xSpeed, -rot , new Rotation2d.fromDegrees(m_gyro.getYaw())));
+    m_kinematics.toSwerveModuleStates(ChassisSpeeds.fromFieldRelativeSpeeds(ySpeed, xSpeed, -rot , new Rotation2d(m_gyro.getYaw()*(Math.PI/180))));
     //SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, kMaxSpeed);
     m_frontLeft.setDesiredState(swerveModuleStates[0]);
     m_frontRight.setDesiredState(swerveModuleStates[1]);
@@ -87,12 +89,13 @@ public class DriveSubsystem extends SubsystemBase {
     m_frontRight.zero();
     m_backLeft.zero();
     m_backRight.zero();
-    m_gyro.reset();
+    m_gyro.setYaw(0 );
   }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run use for telemetry
     System.out.println("CURRENT YAW:" + m_gyro.getYaw());
+    SmartDashboard.putNumber("CURRENT YAW DEGREES:" , m_gyro.getYaw());
   }
 
   @Override
