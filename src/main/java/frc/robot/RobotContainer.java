@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem m_swerve = new DriveSubsystem();
-
+  private final Arm m_arm = new Arm();
   // Replace with CommandPS4Controller or CommandJoystick if needed
  private final CommandJoystick m_driverJoystick = new CommandJoystick(0);
 
@@ -51,7 +51,7 @@ public class RobotContainer {
                 () -> m_driverJoystick.getRawAxis(1),
                 () -> m_driverJoystick.getRawAxis(2)
                 ));
-
+    
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
