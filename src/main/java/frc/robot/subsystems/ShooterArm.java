@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 
 public class ShooterArm extends PIDSubsystem{
@@ -44,6 +45,7 @@ public class ShooterArm extends PIDSubsystem{
         output = Math.min(speed, Math.max(-speed, output));
         a_motor1.set(output);
         a_motor2.set(-output); 
+        SmartDashboard.putNumber("ARM MOTOR USAGE:", output);
         
     }
 

@@ -56,7 +56,9 @@ public class DriveSubsystem extends SubsystemBase {
   //   config.MountPoseRoll =0;
   //   m_gyro.configAllSettings(config);
   // }
-
+    public DriveSubsystem(){
+      resetModule();
+    }
   /**
    * Method to drive the robot using joystick info.
    *
@@ -89,7 +91,7 @@ public class DriveSubsystem extends SubsystemBase {
     m_frontRight.zero();
     m_backLeft.zero();
     m_backRight.zero();
-    m_gyro.setYaw(0 );
+    m_gyro.setYaw(0);
   }
   @Override
   public void periodic() {
