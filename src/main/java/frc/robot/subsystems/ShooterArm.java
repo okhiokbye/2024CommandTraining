@@ -41,8 +41,10 @@ public class ShooterArm extends PIDSubsystem{
 
     @Override
     protected void useOutput(double output, double setpoint) {
+        output = Math.min(speed, Math.max(-speed, output));
         a_motor1.set(output);
-        a_motor2.set(-output);
+        a_motor2.set(-output); 
+        
     }
 
     @Override

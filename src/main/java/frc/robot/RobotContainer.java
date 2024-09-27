@@ -4,11 +4,14 @@
 
 package frc.robot;
 
+import frc.robot.commands.AimArm;
 //import frc.robot.Constants.OperatorConstants;
 //import frc.robot.commands.Autos;
 import frc.robot.commands.Drive;
 //import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ShooterArm;
+import edu.wpi.first.math.controller.PIDController;
 //import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
@@ -24,10 +27,15 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem m_swerve = new DriveSubsystem();
-  private final Arm m_arm = new Arm();
+  private final static PIDController m_armPIDController =
+      new PIDController( //TOO STRONG
+          0.40,
+          0,
+          0);
+  private final ShooterArm m_arm = new ShooterArm(m_armPIDController);
   // Replace with CommandPS4Controller or CommandJoystick if needed
  private final CommandJoystick m_driverJoystick = new CommandJoystick(0);
-
+  private final CommandJoystick m_aimJoystick = new CommandJoystick(1);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -55,7 +63,10 @@ public class RobotContainer {
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-
+      m_aimJoystick.button(5).onTrue(new AimArm(m_arm, -23));
+      m_aimJoystick.button(3).onTrue(new AimArm(m_arm, -78));
+      m_aimJoystick.button(6).onTrue(new AimArm(m_arm, 0));
+      
   }
 
   /**
