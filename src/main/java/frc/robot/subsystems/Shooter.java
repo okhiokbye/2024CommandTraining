@@ -36,6 +36,9 @@ public class Shooter extends SubsystemBase {
     public boolean beamBroken(){
         return laserStick.get();
     }
+    public void setDirec(int direc){
+        this.direc= direc;
+    }
 
 
 }
