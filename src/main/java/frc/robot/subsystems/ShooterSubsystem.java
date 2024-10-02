@@ -6,6 +6,40 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.DigitalInput;
 
+
+
+
+/*
+ *  DEPRECATED OLD CODE FROM OLD ROBOT JANK 10000     
+ * 
+ * 
+ *  DEPRECATED OLD CODE FROM OLD ROBOT JANK 10000     
+ * 
+ *  DEPRECATED OLD CODE FROM OLD ROBOT JANK 10000     
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *  DEPRECATED OLD CODE FROM OLD ROBOT JANK 10000     
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 public class ShooterSubsystem extends SubsystemBase{
     private final CANSparkMax m_intake1 ;
     private final CANSparkMax m_intake2 ; 

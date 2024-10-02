@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
-    private final CANSparkMax m_intake1 ;
-    private final CANSparkMax m_intake2 ; 
+    private final CANSparkMax m_intake1;
+    private final CANSparkMax m_intake2; 
     private final CANSparkMax m_arm1;
     private final CANSparkMax m_arm2; // change can ids later
     private final DigitalInput laserStick;

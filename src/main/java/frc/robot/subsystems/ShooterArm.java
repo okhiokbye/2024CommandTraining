@@ -9,10 +9,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 
 public class ShooterArm extends PIDSubsystem{
-    
-    
-   
-
     private final CANSparkMax a_motor1;
     private final CANSparkMax a_motor2;
     private RelativeEncoder m1_encoder;

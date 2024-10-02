@@ -28,13 +28,13 @@ public class Shoot extends Command {
      public void execute(){
        
     
-        if(time <= time+0.8){
+        if(Timer.getFPGATimestamp() <= time+0.8){
             m_gun.runBlueBlack(speed, direc);
         }
-        else if(time <= time+1.3){
+        else if(Timer.getFPGATimestamp()<= time+1.3){
             m_gun.runGreen(speed, direc);
         }
-        else if(time> time+1.3){
+        else if(Timer.getFPGATimestamp()> time+1.3){
             done = true;
         }
 

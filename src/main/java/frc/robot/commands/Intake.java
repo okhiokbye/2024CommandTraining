@@ -18,19 +18,19 @@ public class Intake extends Command {
     }
     @Override
     public void initialize() {
-        
+        //teehee
     }
      @Override
      public void execute(){
        m_gun.runGreen(0.6,direc);
-        
-
      }
     @Override
     public void end(boolean interrupted){
-        m_gun.runBlueBlack(0.9, direc); 
-        // WAIT 0.1 SEC THEN STOP
-        m_gun.runGreen(0,direc);
+        m_gun.runBlueBlack(0.9, -direc); 
+        double time = Timer.getFPGATimestamp();
+        if(Timer.getFPGATimestamp() >= time+0.1)
+          m_gun.runBlueBlack(0,direc);
+      // idk if this works. otherwise just move it to the execute with a conditional
     }
 
   // Make this return true when this Command no longer needs to run execute()
