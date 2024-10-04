@@ -57,7 +57,7 @@ public class ShooterSubsystem extends SubsystemBase{
         m_intake2 = new CANSparkMax(2, MotorType.kBrushless); //green wheels, intake
         m_arm1= null;
         m_arm2 = null;
-        laserStick = new DigitalInput(4);
+        laserStick = null;
         goal =1; //inital goal speaker
     }
 
