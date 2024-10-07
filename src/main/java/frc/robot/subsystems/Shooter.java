@@ -11,7 +11,7 @@ public class Shooter extends SubsystemBase {
     private final CANSparkMax m_intake2; 
     private final CANSparkMax m_arm1;
     private final CANSparkMax m_arm2; // change can ids later
-    private final DigitalInput laserStick;
+    
     private final int goal; // 0 for amp, 1 for speaker
 
     private boolean isHoldingDownShooter = false;
@@ -23,7 +23,7 @@ public class Shooter extends SubsystemBase {
         m_intake2 = new CANSparkMax(2, MotorType.kBrushless); //green wheels, intake
         m_arm1= null;
         m_arm2 = null;
-        laserStick = new DigitalInput(4);
+      
         goal =1; //inital goal speaker
     }
 
@@ -33,9 +33,7 @@ public class Shooter extends SubsystemBase {
     public void runBlueBlack(double output, double direc){
         m_intake2.set(output*direc);
     }
-    public boolean beamBroken(){
-        return laserStick.get();
-    }
+  
     public void setDirec(int direc){
         this.direc= direc;
     }
