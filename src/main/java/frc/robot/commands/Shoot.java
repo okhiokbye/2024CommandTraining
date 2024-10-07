@@ -13,7 +13,7 @@ public class Shoot extends Command {
     private final double time;
     public Shoot(Shooter gun, double speed, int direc){
         this.m_gun = gun;
-        this.speed = speed;
+        this.speed = 0.05;
         this.direc = direc;
         this.done = false;
         this.time = Timer.getFPGATimestamp();

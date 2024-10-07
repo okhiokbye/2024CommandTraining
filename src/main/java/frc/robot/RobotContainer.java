@@ -38,9 +38,10 @@ public class RobotContainer {
           0.40,
           0,
           0);
-  private final Shooter m_gun = new Shooter();
-  private final ShooterArm m_arm = new ShooterArm(m_armPIDController, m_gun);
   private final DigitalInput laserSticky = new DigitalInput(4);
+  private final Shooter m_gun = new Shooter(()->laserSticky.get());
+  private final ShooterArm m_arm = new ShooterArm(m_armPIDController, m_gun);
+  
   // Replace with CommandPS4Controller or CommandJoystick if needed
  private final CommandJoystick m_driverJoystick = new CommandJoystick(0);
   private final CommandJoystick m_aimJoystick = new CommandJoystick(1);
@@ -75,8 +76,8 @@ public class RobotContainer {
       m_aimJoystick.button(3).onTrue(new AimArm(m_arm, -78.0, 1));
       m_aimJoystick.button(6).onTrue(new AimArm(m_arm, 0,1));
       m_aimJoystick.button(1).onTrue(new Shoot(m_gun, 1.0, -1));
-      m_aimJoystick.button(2).whileTrue(new Intake(m_gun, ()->laserSticky.get()));
-
+      m_aimJoystick.button(2).onTrue(new Intake(m_gun, ()->laserSticky.get()));
+      
       
   }
 
