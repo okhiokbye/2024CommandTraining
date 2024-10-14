@@ -75,7 +75,7 @@ public class RobotContainer {
       m_aimJoystick.button(5).onTrue(new AimArm(m_arm, -23.0, -1));
       m_aimJoystick.button(3).onTrue(new AimArm(m_arm, -78.0, 1));
       m_aimJoystick.button(6).onTrue(new AimArm(m_arm, 0,1));
-      m_aimJoystick.button(1).onTrue(new Shoot(m_gun, 1.0, -1));
+      m_aimJoystick.trigger().onTrue(new Shoot(m_gun, 1.0, -1));
       m_aimJoystick.button(2).onTrue(new Intake(m_gun, ()->laserSticky.get()));
       
       

@@ -31,7 +31,7 @@ public class ShooterArm extends PIDSubsystem{
         //a_encoder = new DutyCycleEncoder(5); // is absolute encoder yay no workie
         a_encoder.setPositionConversionFactor(1); //180*2*Math.PI
         this.m_shooter = shooter;
-        atAmp();
+        zero();
     }
     public void zero(){
         a_encoder.setPosition(0);

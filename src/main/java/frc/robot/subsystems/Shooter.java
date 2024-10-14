@@ -36,10 +36,10 @@ public class Shooter extends SubsystemBase {
     // public void periodic(){
     //     SmartDashboard.putBoolean("BEAMBREAKER", )
     // }
-    public void runGreen(double output, double direc){
+    public void runBlueBlack(double output, double direc){
         m_intake1.set(output*direc);
     }
-    public void runBlueBlack(double output, double direc){
+    public void runGreen(double output, double direc){
         m_intake2.set(output*direc);
     }
     @Override

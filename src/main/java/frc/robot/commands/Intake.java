@@ -24,20 +24,29 @@ public class Intake extends Command {
     }
      @Override
      public void execute(){
-       m_gun.runBlueBlack(0.05,direc);
+       m_gun.runGreen(0.1,direc);
 
-       HOLY FUCK YOU SWITCHED THE NAME JESUS HOW BAKED ARE YOU
+       
        SmartDashboard.putBoolean("BEMABERKA", beamBreak.get());
        System.out.println("I AM EXECUTING");
+      if(isFinished()){
+        m_gun.runBlueBlack(0.9, -direc);
+        try {
+          Thread.sleep(100);
+      } catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+      }
+      m_gun.runBlueBlack(0, -direc);
+      
+        
+      }
      }
     @Override
     public void end(boolean interrupted){
-        m_gun.runGreen(0.1, -direc); 
-        double time = Timer.getFPGATimestamp();
-        if(Timer.getFPGATimestamp() >= time+0.1)
-          m_gun.runGreen(0,direc);
-        System.out.println("RUNNED THE END FUnctionN");
-      MOVE IT move it to the execute with a conditional / NEW COMMAND OR SMTH TO CORRECT OR THREAD.SLEEP
+        m_gun.runGreen(0.0, direc); 
+        m_gun.runBlueBlack(0, direc);
+        
     }
 
   // Make this return true when this Command no longer needs to run execute()
