@@ -24,7 +24,7 @@ public class Intake extends Command {
     }
      @Override
      public void execute(){
-       m_gun.runGreen(0.1,direc);
+       m_gun.runGreen(0.9,direc);
 
        
        SmartDashboard.putBoolean("BEMABERKA", beamBreak.get());
