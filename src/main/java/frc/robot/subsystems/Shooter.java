@@ -51,6 +51,22 @@ public class Shooter extends SubsystemBase {
     public void setDirec(int direc){
         this.direc= direc;
     }
+    public Command intakeCmd(){ // set green rollers, then when the beam break sees hoop stop it (no intake correction)
+        return new StartEndCommand(
+            ()->m_intake2.set(0.9),
+            ()->m_intake2.set(0)
+        ).until(beamBreak::get);
+        //what the fuck did i cook below lmao
+        //return this.runOnce(()->m_intake2.set(0.9)).andThen(WaitUntil(beamBreak.get()).andThen(this.runOnce(()->m_intake2.set(0))));
+    }
+    public Command intakeCorrecCmdt(){ //correcting for intake here
+        return new StartEndCommand(
+            ()->m_intake1.set(1),
+            ()->m_intake1.set(0)).withTimeout(0.1);
+    }
+    public Command shootCmd(){
+            return null;
+    }
 
 
 }
