@@ -8,6 +8,9 @@ import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
@@ -52,21 +55,24 @@ public class Shooter extends SubsystemBase {
         this.direc= direc;
     }
     public Command intakeCmd(){ // set green rollers, then when the beam break sees hoop stop it (no intake correction)
-        return new StartEndCommand(
+        return new StartEndCommand( // this whole thign is probably just a functional command but lol
             ()->m_intake2.set(0.9),
             ()->m_intake2.set(0)
-        ).until(beamBreak::get);
-        //what the fuck did i cook below lmao
+        ).until(()->!beamBreak.get());
+        //what the fuck did i    cook below lmao
         //return this.runOnce(()->m_intake2.set(0.9)).andThen(WaitUntil(beamBreak.get()).andThen(this.runOnce(()->m_intake2.set(0))));
     }
-    public Command intakeCorrecCmdt(){ //correcting for intake here
+    public Command intakeCorrectCmd(){ //correcting for intake here
         return new StartEndCommand(
-            ()->m_intake1.set(1),
+            ()->m_intake1.set(0.9),
             ()->m_intake1.set(0)).withTimeout(0.1);
     }
-    public Command shootCmd(){
-            return null;
+    public Command runBlueBlackCmd(double output, int direc){
+        return this.runOnce(()-> m_intake1.set(output*direc));
     }
-
+    public Command runGreenCmd(double output, int direc){
+        return this.runOnce(()->m_intake2.set(output*direc));
+    }
+    // COMBINE BOTH RUN CMD METHODS INTO ONE
 
 }

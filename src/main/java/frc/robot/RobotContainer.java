@@ -18,6 +18,9 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
 //import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -70,13 +73,13 @@ public class RobotContainer {
                 ));
     
 
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
+    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,x
     // cancelling on release.
       m_aimJoystick.button(5).onTrue(new AimArm(m_arm, -23.0, -1));
       m_aimJoystick.button(3).onTrue(new AimArm(m_arm, -78.0, 1));
       m_aimJoystick.button(6).onTrue(new AimArm(m_arm, 0,1));
-      m_aimJoystick.trigger().onTrue(new Shoot(m_gun, 1.0, -1));
-      m_aimJoystick.button(2).onTrue(new Intake(m_gun, ()->laserSticky.get()));
+      m_aimJoystick.trigger().onTrue(Commands.parallel(m_gun.runBlueBlackCmd(1, -1), new WaitCommand(0.8).andThen(m_gun.runGreenCmd(0.3, -1))));
+      m_aimJoystick.button(2).onTrue(m_gun.intakeCmd());            
       
       
   }
