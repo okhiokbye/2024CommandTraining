@@ -67,12 +67,9 @@ public class Shooter extends SubsystemBase {
             ()->m_intake1.set(0.9),
             ()->m_intake1.set(0)).withTimeout(0.1);
     }
-    public Command runBlueBlackCmd(double output, int direc){
-        return this.runOnce(()-> m_intake1.set(output*direc));
+    public Command spinCmd(double bSpeed,double gSpeed, int direc){
+        return Commands.ParallelDeadlineGroup(()->m_intake1.set(bSpeed*direc), ()->m_intake2.set(gSpeed*direc));
     }
-    public Command runGreenCmd(double output, int direc){
-        return this.runOnce(()->m_intake2.set(output*direc));
-    }
-    // COMBINE BOTH RUN CMD METHODS INTO ONE
+
 
 }

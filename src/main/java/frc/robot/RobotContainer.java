@@ -78,7 +78,7 @@ public class RobotContainer {
       m_aimJoystick.button(5).onTrue(new AimArm(m_arm, -23.0, -1));
       m_aimJoystick.button(3).onTrue(new AimArm(m_arm, -78.0, 1));
       m_aimJoystick.button(6).onTrue(new AimArm(m_arm, 0,1));
-      m_aimJoystick.trigger().onTrue(Commands.parallel(m_gun.runBlueBlackCmd(1, -1), new WaitCommand(0.8).andThen(m_gun.runGreenCmd(0.3, -1))));
+      m_aimJoystick.trigger().onTrue(m_gun.spinCmd(1,0,-1).andThen(new WaitCommand(0.8)).andThen(m_gun.spinCmd(1,0.3,-1)).andThen(m_gun.spinCmd(0,0,0)));
       m_aimJoystick.button(2).onTrue(m_gun.intakeCmd());            
       
       
