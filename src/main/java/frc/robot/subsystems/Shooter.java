@@ -40,11 +40,11 @@ public class Shooter extends SubsystemBase {
     // public void periodic(){
     //     SmartDashboard.putBoolean("BEAMBREAKER", )
     // }
-    public void runBlueBlack(double output, double direc){
-        m_intake1.set(output*direc);
-    }
-    public void runGreen(double output, double direc){
-        m_intake2.set(output*direc);
+    public void spin(double bOutput, double gOutput, double direc){
+        m_intake1.set(bOutput*direc);
+    
+    
+        m_intake2.set(gOutput*direc);
     }
     @Override
     public void periodic(){
@@ -69,7 +69,7 @@ public class Shooter extends SubsystemBase {
             ()->m_intake1.set(0)).withTimeout(0.1);
     }
     public Command spinCmd(double bSpeed,double gSpeed, int direc){
-        return Commands.parallel( this.runOnce(()->m_intake1.set(bSpeed*direc)), this.runOnce(()->m_intake2.set(gSpeed*direc)));
+        return this.runOnce(()-> spin(bSpeed, gSpeed, direc));
     }
 
 

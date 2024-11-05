@@ -20,33 +20,33 @@ public class Shoot extends Command {
     }
     @Override
     public void initialize() {
-        m_gun.runBlueBlack(0, direc);
-        time = Timer.getFPGATimestamp();
-        m_gun.runGreen(0,direc);
+        // m_gun.runBlueBlack(0, direc);
+        // time = Timer.getFPGATimestamp();
+        // m_gun.runGreen(0,direc);
     }
      @Override
      public void execute(){
        
-        System.out.println("EXECUTING");
-        if(Timer.getFPGATimestamp() <= time+1){
-            m_gun.runBlueBlack(speed, direc);
-            System.out.println("ACCELERATING");
-        }
-        else if(Timer.getFPGATimestamp()<= time+1.5){
-            m_gun.runGreen(speed, direc);
-            m_gun.runBlueBlack(speed, direc);
-            System.out.println("LAUNCHING");
-        }
-        else if(Timer.getFPGATimestamp()> time+1.5){
-            done = true;
-        }
+        // System.out.println("EXECUTING");
+        // if(Timer.getFPGATimestamp() <= time+1){
+        //     m_gun.runBlueBlack(speed, direc);
+        //     System.out.println("ACCELERATING");
+        // }
+        // else if(Timer.getFPGATimestamp()<= time+1.5){
+        //     m_gun.runGreen(speed, direc);
+        //     m_gun.runBlueBlack(speed, direc);
+        //     System.out.println("LAUNCHING");
+        // }
+        // else if(Timer.getFPGATimestamp()> time+1.5){
+        //     done = true;
+        // }
 
      }
     @Override
     public void end(boolean interrupted){
-        m_gun.runBlueBlack(0, direc);
-        m_gun.runGreen(0,direc);
-        System.out.println("STOP STOP STOP");
+        // m_gun.runBlueBlack(0, direc);
+        // m_gun.runGreen(0,direc);
+        // System.out.println("STOP STOP STOP");
     }
 
   // Make this return true when this Command no longer needs to run execute()

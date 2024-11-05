@@ -24,28 +24,28 @@ public class Intake extends Command {
     }
      @Override
      public void execute(){
-       m_gun.runGreen(0.9,direc);
+      //  m_gun.runGreen(0.9,direc);
 
        
-       SmartDashboard.putBoolean("BEMABERKA", beamBreak.get());
-       System.out.println("I AM EXECUTING");
-      if(isFinished()){
-        m_gun.runBlueBlack(0.9, -direc);
-        try {
-          Thread.sleep(100);
-      } catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-      }
-      m_gun.runBlueBlack(0, -direc);
+      //  SmartDashboard.putBoolean("BEMABERKA", beamBreak.get());
+      //  System.out.println("I AM EXECUTING");
+      // if(isFinished()){
+      //   m_gun.runBlueBlack(0.9, -direc);
+      //   try {
+      //     Thread.sleep(100);
+      // } catch (InterruptedException e) {
+      //     // TODO Auto-generated catch block
+      //     e.printStackTrace();
+      // }
+      // m_gun.runBlueBlack(0, -direc);
       
         
       }
-     }
+     
     @Override
     public void end(boolean interrupted){
-        m_gun.runGreen(0.0, direc); 
-        m_gun.runBlueBlack(0, direc);
+        // m_gun.runGreen(0.0, direc); 
+        // m_gun.runBlueBlack(0, direc);
         
     }
 
