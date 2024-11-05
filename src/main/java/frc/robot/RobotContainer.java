@@ -14,6 +14,10 @@ import frc.robot.commands.Shoot;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.ShooterArm;
+
+import java.util.function.BooleanSupplier;
+import java.util.function.Supplier;
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
 //import frc.robot.subsystems.ExampleSubsystem;
@@ -42,7 +46,7 @@ public class RobotContainer {
           0,
           0);
   private final DigitalInput laserSticky = new DigitalInput(4);
-  private final Supplier<Boolean> beamBreak = ()->laserSticky.get();
+  private final BooleanSupplier beamBreak = ()->!laserSticky.get();
   private final Shooter m_gun = new Shooter(()->laserSticky.get());
   private final ShooterArm m_arm = new ShooterArm(m_armPIDController, m_gun);
   
@@ -81,7 +85,7 @@ public class RobotContainer {
       m_aimJoystick.button(6).onTrue(new AimArm(m_arm, 0,1));
       m_aimJoystick.trigger().onTrue(m_gun.spinCmd(1,0,-1).andThen(new WaitCommand(0.8)).andThen(m_gun.spinCmd(1,0.3,-1)).andThen(m_gun.spinCmd(0,0,0)));
       //m_aimJoystick.button(2).whenPressed(m_gun.intakeCmd()).whenReleased(m_gun.spinCmd(0,0,0));
-      m_aimJoystick.button(2).onTrue(m_gun.spinCmd(0,1,-1).until(!beamBreak.get()).andThen(m_gun.spinCmd(0.9,0,1).withTimeout(0.1))).onFalse(m_gun.spinCmd(0,0,0));            
+      m_aimJoystick.button(2).onTrue(m_gun.spinCmd(0,1,-1).until(beamBreak).andThen(m_gun.spinCmd(0.9,0,1).withTimeout(0.1))).onFalse(m_gun.spinCmd(0,0,0));            
       
       
   }

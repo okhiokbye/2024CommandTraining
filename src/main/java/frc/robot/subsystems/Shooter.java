@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -62,7 +63,7 @@ public class Shooter extends SubsystemBase {
             ()-> m_intake2.set(0),
             ()-> !beamBreak.get(),
             this
-        )
+        );
         //what the fuck did i    cook below lmao
         //return this.runOnce(()->m_intake2.set(0.9)).andThen(WaitUntil(beamBreak.get()).andThen(this.runOnce(()->m_intake2.set(0))));
     }
