@@ -55,10 +55,13 @@ public class Shooter extends SubsystemBase {
         this.direc= direc;
     }
     public Command intakeCmd(){ // set green rollers, then when the beam break sees hoop stop it (no intake correction)
-        return new StartEndCommand( // this whole thign is probably just a functional command but lol
-            ()->m_intake2.set(0.9),
-            ()->m_intake2.set(0)
-        ).until(()->!beamBreak.get());
+        return new FunctionalCommand(
+            ()-> m_intake2.set(0.1), // init
+            ()-> m_intake2.set(0.9),
+            ()-> m_intake2.set(0),
+            ()-> !beamBreak.get(),
+            this
+        )
         //what the fuck did i    cook below lmao
         //return this.runOnce(()->m_intake2.set(0.9)).andThen(WaitUntil(beamBreak.get()).andThen(this.runOnce(()->m_intake2.set(0))));
     }
