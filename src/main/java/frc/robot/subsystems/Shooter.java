@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -68,7 +69,7 @@ public class Shooter extends SubsystemBase {
             ()->m_intake1.set(0)).withTimeout(0.1);
     }
     public Command spinCmd(double bSpeed,double gSpeed, int direc){
-        return Commands.ParallelDeadlineGroup(()->m_intake1.set(bSpeed*direc), ()->m_intake2.set(gSpeed*direc));
+        return Commands.parallel( this.runOnce(()->m_intake1.set(bSpeed*direc)), this.runOnce(()->m_intake2.set(gSpeed*direc)));
     }
 
 
